@@ -1,5 +1,8 @@
 const { ApolloServer, gql } = require("apollo-server");
 const merge = require("lodash.merge");
+
+const DataLoader = require("dataloader");
+
 require("./crade");
 
 // Type definitions define the "shape" of your data and specify
@@ -36,7 +39,22 @@ const resolvers = merge(
 // responsible for fetching the data for those types.
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  context: () => {
+    return {
+      loaders: {
+        developers: new DataLoader(ids =>
+          require("./modules/developer/data").getDevelopersByIds(ids)
+        ),
+        games: new DataLoader(ids =>
+          require("./modules/game/data").getGamesByIds(ids)
+        ),
+        studios: new DataLoader(ids =>
+          require("./modules/studio/data").getStudiosByIds(ids)
+        )
+      }
+    };
+  }
 });
 
 // This `listen` method launches a web-server.  Existing apps

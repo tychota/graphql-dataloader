@@ -3,7 +3,7 @@ const data = require("./data");
 module.exports = {
   Query: {
     hello: () => "world",
-    game: (_root, args, _context, _info) => {
+    game: (_root, args, context, _info) => {
       console.log(
         chalk.blue("Calling ") +
           chalk.red("Query") +
@@ -11,7 +11,7 @@ module.exports = {
           chalk.red("game(id)") +
           chalk.blue(" resolver function.")
       );
-      return data.getGameById(args.id);
+      return context.loaders.games.load(args.id);
     },
     games: () => {
       console.log(

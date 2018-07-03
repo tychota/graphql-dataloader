@@ -7,6 +7,7 @@
   "dependencies": {
     "apollo-server": "^2.0.0-rc.6",
     "chalk": "^2.4.1",
+    "dataloader": "^1.4.0",
     "graphql": "^0.13.2",
     "lodash.merge": "^4.6.1"
   }

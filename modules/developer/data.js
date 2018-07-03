@@ -16,6 +16,20 @@ class GameDataAccess {
 
     return _devs.get(id);
   }
+
+  static async getDevelopersByIds(ids) {
+    console.log(
+      chalk.yellow("Performing a ") +
+        chalk.red("Batched SELECT") +
+        chalk.yellow(" sql query on table ") +
+        chalk.red("Developers") +
+        chalk.yellow(" with ids ") +
+        chalk.red(ids.join(" ")) +
+        chalk.yellow(".")
+    );
+
+    return ids.map(id => (_devs.has(id) ? _devs.get(id) : null));
+  }
 }
 
 module.exports = GameDataAccess;

@@ -2,7 +2,7 @@ const data = require("./data");
 
 module.exports = {
   Game: {
-    studio: (game, _args, _context, _info) => {
+    studio: (game, _args, context, _info) => {
       console.log(
         chalk.blue("Calling ") +
           chalk.red("Game") +
@@ -10,7 +10,7 @@ module.exports = {
           chalk.red("studio") +
           chalk.blue(" resolver function.")
       );
-      return data.getStudioById(game.studio);
+      return context.loaders.studios.load(game.studio);
     }
   }
 };

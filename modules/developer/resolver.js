@@ -2,7 +2,7 @@ const data = require("./data");
 
 module.exports = {
   Studio: {
-    developers: (studio, _args, _context, _info) => {
+    developers: (studio, _args, context, _info) => {
       console.log(
         chalk.blue("Calling ") +
           chalk.red("Studio") +
@@ -10,7 +10,7 @@ module.exports = {
           chalk.red("developers") +
           chalk.blue(" resolver function.")
       );
-      return studio.developers.map(id => data.getDeveloperById(id));
+      return context.loaders.developers.loadMany(studio.developers);
     }
   }
 };

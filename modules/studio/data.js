@@ -16,6 +16,20 @@ class StudioDataAccess {
 
     return _studios.get(id);
   }
+
+  static async getStudiosByIds(ids) {
+    console.log(
+      chalk.yellow("Performing a ") +
+        chalk.red("Batched SELECT") +
+        chalk.yellow(" sql query on table ") +
+        chalk.red("Studios") +
+        chalk.yellow(" with ids ") +
+        chalk.red(ids.join(" ")) +
+        chalk.yellow(".")
+    );
+
+    return ids.map(id => (_studios.has(id) ? _studios.get(id) : null));
+  }
 }
 
 module.exports = StudioDataAccess;
